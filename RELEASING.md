@@ -26,11 +26,11 @@ HFS is a multi-crate Rust workspace where all crates share the same version numb
 
 - Consider downloading the latest FHIR Specification (R6) and test files, [generating](README.md#code-generation), then running a [comprehensive test](README.md#running-tests), and checking in the latest into GitHub.
 
-  Three build scripts download from `build.fhir.org`, and each one skips the download when its marker file is less than 24 hours old. A fresh `git clone`, `git worktree add` or checkout sets every file's mtime to "now", so without the steps below nothing is downloaded and the generator reruns on the old specs. Refresh all three together: `build.fhir.org` is a rolling build, and refreshing only some of them mixes builds (models generated from one build, test examples from another), which shows up as `test_r6_json_examples` failures.
+  Three file sets come from `build.fhir.org`. Two build scripts download theirs and skip the download when their marker file is less than 24 hours old. A fresh `git clone`, `git worktree add` or checkout sets every file's mtime to "now", so without the steps below nothing is downloaded and the generator reruns on the old specs. The R6 test examples are only refreshed by running `crates/fhir/scripts/download-r6-examples.sh` (needs `curl` and `unzip`). Refresh all three together: `build.fhir.org` is a rolling build, and refreshing only some of them mixes builds (models generated from one build, test examples from another), which shows up as `test_r6_json_examples` failures.
 ```bash
 rm -f crates/fhir-gen/resources/R6/download_metadata.json   # spec definitions (helios-fhir-gen)
-rm -f crates/fhir/tests/data/json/R6/.download_marker      # R6 JSON/XML test examples (helios-fhir)
-cargo build -p helios-fhir-gen --features R4,R4B,R5,R6     # downloads both of the above
+cargo build -p helios-fhir-gen --features R4,R4B,R5,R6     # downloads the above
+./crates/fhir/scripts/download-r6-examples.sh              # R6 JSON/XML test examples (helios-fhir)
 ./target/debug/helios-fhir-gen --all
 # data/search-parameters-r6.json is downloaded by helios-hfs's build script, which
 # `--all-features` turns off (skip-r6-download). It is the same file as the

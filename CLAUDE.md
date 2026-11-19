@@ -140,9 +140,6 @@ don't duplicate them elsewhere; cite this section instead.
 - **`cargo fmt --all` fails when run from a worktree.** Run it from the main
   checkout, or format explicit paths (`cargo fmt -- <path>...`) from the
   worktree instead.
-- **Compiling anything here leaves ~3,500 R6 spec files dirty, `stat`-only,**
-  even when nothing was actually edited. Never `git add -A` or
-  `git commit -a` inside a worktree — stage explicit paths.
 - **`> nul` does not discard output — it creates a real file named `nul`.**
   The shell for these sessions is bash, also on Windows, so `nul` is not the
   null device. From then on `git worktree remove` fails partway (it
