@@ -10,7 +10,7 @@ repository.workspace = true
 homepage = "https://github.com/HeliosSoftware/hfs/tree/main/crates/fhir"
 readme = "README.md"
 keywords = ["helios-software", "hl7", "fhir", "helios-fhir-server", "healthcare"]
-exclude = ["tests/data/**"]
+exclude = ["tests/data/**", "scripts/**"]
 
 [features]
 default = ["R4"]
@@ -18,6 +18,8 @@ R4 = []
 R4B = []
 R5 = []
 R6 = []
+# No-op. Kept so builds that still pass `helios-fhir/skip-r6-download` keep
+# compiling. The R6 examples are refreshed by scripts/download-r6-examples.sh.
 skip-r6-download = []
 xml = ["helios-serde-support/xml"]
 
@@ -38,10 +40,6 @@ tracing = "0.1"
 
 [dev-dependencies]
 rust_decimal_macros = "1.0"
-
-[build-dependencies]
-reqwest = { version = "0.12", features = ["blocking"] }
-zip = "9"
 
 [package.metadata.docs.rs]
 all-features = true

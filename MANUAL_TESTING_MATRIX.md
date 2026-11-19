@@ -1505,10 +1505,9 @@ For each backend row, attach to the release issue:
   `HFS_SUBSCRIPTION_ALLOW_PRIVATE_ENDPOINTS` only affects the messaging channel.
 - **One AWS credential chain per process**: with MinIO as the primary store, the S3
   export/sink buckets must also live in MinIO.
-- **R6 fixtures**: the T0 build (`--workspace --all-features`, which includes
-  `skip-r6-download`) leaves `crates/fhir/tests/data` alone; a build that enables `R6`
-  without it downloads the HL7 examples there and rewrites the checked-in fixtures, so
-  never `git commit -a` after one.
+- **R6 fixtures**: no build touches `crates/fhir/tests/data`. Only
+  `crates/fhir/scripts/download-r6-examples.sh` rewrites the checked-in R6 examples,
+  so never `git commit -a` after running it outside a spec refresh.
 - Auth stays off for this pass; when auth is on, `$export`, `$bulk-submit`,
   `$sql-export`, `$purge`, and `$reindex` need their `system/*` scopes.
 - **A pass with auth on needs the browser login for T3 and the Tenants page.**

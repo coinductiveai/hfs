@@ -35,10 +35,9 @@ the published corpus disagree, per FHIR version, in a form review can see:
 | `known-failures-r4b.json` | `crates/fhir/tests/data/json/R4B` |
 | `known-failures-r5.json` | `crates/fhir/tests/data/json/R5` |
 
-R6 has no baseline on purpose: `crates/fhir/build.rs` wipes and re-downloads
-`tests/data/json/R6` from `build.fhir.org` whenever the R6 feature is on and
-the local copy is over 24 hours old, so its content is volatile and nothing
-stable can be pinned to it.
+R6 has no baseline on purpose: `tests/data/json/R6` is a snapshot of the
+rolling `build.fhir.org` build that `crates/fhir/scripts/download-r6-examples.sh`
+replaces wholesale on every spec refresh, so nothing stable can be pinned to it.
 
 ## The ratchet
 

@@ -65,11 +65,10 @@
 //!
 //! # Why R6 is excluded
 //!
-//! `crates/fhir/build.rs` **wipes and re-downloads** `tests/data/json/R6`
-//! from `build.fhir.org` whenever the R6 feature is on and the local copy is
-//! over 24h old. R6 corpus content is therefore volatile and no stable
-//! baseline can be pinned to it. R4/R4B/R5 are untouched by that build
-//! script and are stable vendored corpora.
+//! `tests/data/json/R6` is a snapshot of the rolling `build.fhir.org` build,
+//! and `crates/fhir/scripts/download-r6-examples.sh` **wipes and replaces** it
+//! on every spec refresh. R6 corpus content is therefore volatile and no
+//! stable baseline can be pinned to it. R4/R4B/R5 are stable vendored corpora.
 //!
 //! # Running
 //!
@@ -479,7 +478,7 @@ fn run_version(version: FhirVersion, version_dir: &str) {
 
 // ---------------------------------------------------------------------------
 // Tests -- one per stable vendored corpus. R6 is excluded on purpose (see the
-// module docs: crates/fhir/build.rs re-downloads and wipes it).
+// module docs: every spec refresh replaces it wholesale).
 // ---------------------------------------------------------------------------
 
 #[cfg(feature = "R4")]

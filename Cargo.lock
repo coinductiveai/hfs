@@ -3361,13 +3361,11 @@ dependencies = [
  "helios-fhirpath-support",
  "helios-serde-support",
  "regex",
- "reqwest",
  "rust_decimal",
  "rust_decimal_macros",
  "serde",
  "serde_json",
  "tracing",
- "zip",
 ]
 
 [[package]]
